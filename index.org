@@ -1,0 +1,39 @@
+#+REVEAL_THEME: night
+#+OPTIONS: toc:0, num:nil, f:t
+#+REVEAL_ROOT: file:///Users/timmciver/Workspace/reveal.js
+
+* DDD: What Is It?
+
+** Domain-Driven Design
+#+ATTR_REVEAL: :frag (appear)
+- Emphasizes the domain model as the central piece of an application
+- Emphasizes direct collaboration between developers and domain experts
+- Results in a "Ubiquitous Language" that is used to communicate domain concepts
+
+* Building Blocks
+
+** Types of Domain Objects
+- Entities
+- Value Objects
+
+** Entities
+Are objects that
+#+ATTR_REVEAL: :frag (appear)
+- Have some kind of identity
+- Are not defined by their attributes
+- Need to have changes tracked
+
+** Entities
+An example might be a User object.
+#+ATTR_REVEAL: :frag (appear)
+- Cannot use attributes such as name and address to identify as these can change over time.
+- SSN could be used as an ID, if there is one.
+- For entities that have no natural identifier, one can be generated at creation time.
+
+** Value Objects
+Are objects that
+#+ATTR_REVEAL: :frag (appear)
+- Are defined by their attributes
+- Objects that have no identity but are defined by their values (e.g., Name, Date, Address)
+
+

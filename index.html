@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<meta name="author" content="(Tim McIver)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="file:///Users/timmciver/Workspace/reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="file:///Users/timmciver/Workspace/reveal.js/css/theme/night.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'file:///Users/timmciver/Workspace/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2 class="author">Tim McIver</h2><p class="date">Created: 2017-06-20 Tue 23:13</p>
+</section>
+
+<section>
+<section id="slide-orgb6f594e">
+<h2 id="orgb6f594e">DDD: What Is It?</h2>
+<div class="outline-text-2" id="text-orgb6f594e">
+</div></section>
+<section id="slide-org8b859ba">
+<h3 id="org8b859ba">Domain-Driven Design</h3>
+<ul>
+<li class="fragment appear">Emphasizes the domain model as the central piece of an application</li>
+<li class="fragment appear">Emphasizes direct collaboration between developers and domain experts</li>
+<li class="fragment appear">Results in a "Ubiquitous Language" that is used to communicate domain concepts</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd67fefa">
+<h2 id="orgd67fefa">Building Blocks</h2>
+<div class="outline-text-2" id="text-orgd67fefa">
+</div></section>
+<section id="slide-org09f1c5f">
+<h3 id="org09f1c5f">Types of Domain Objects</h3>
+<ul>
+<li>Entities</li>
+<li>Value Objects</li>
+
+</ul>
+
+</section>
+<section id="slide-orgf254911">
+<h3 id="orgf254911">Entities</h3>
+<p>
+Are objects that
+</p>
+<ul>
+<li class="fragment appear">Have some kind of identity</li>
+<li class="fragment appear">Are not defined by their attributes</li>
+<li class="fragment appear">Need to have changes tracked</li>
+
+</ul>
+
+</section>
+<section id="slide-orgcefa032">
+<h3 id="orgcefa032">Entities</h3>
+<p>
+An example might be a User object.
+</p>
+<ul>
+<li class="fragment appear">Cannot use attributes such as name and address to identify as these can change over time.</li>
+<li class="fragment appear">SSN could be used as an ID, if there is one.</li>
+<li class="fragment appear">For entities that have no natural identifier, one can be generated at creation time.</li>
+
+</ul>
+
+</section>
+<section id="slide-orgdbddad8">
+<h3 id="orgdbddad8">Value Objects</h3>
+<p>
+Are objects that
+</p>
+<ul>
+<li class="fragment appear">Are defined by their attributes</li>
+<li class="fragment appear">Objects that have no identity but are defined by their values (e.g., Name, Date, Address)</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="file:///Users/timmciver/Workspace/reveal.js/lib/js/head.min.js"></script>
+<script src="file:///Users/timmciver/Workspace/reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'file:///Users/timmciver/Workspace/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'file:///Users/timmciver/Workspace/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///Users/timmciver/Workspace/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///Users/timmciver/Workspace/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'file:///Users/timmciver/Workspace/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>
