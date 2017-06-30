@@ -35,7 +35,7 @@ are objects that ARE defined by their attributes
 #+BEGIN_SRC php
 // Entity
 class User {
-  private $id; // could have used SSN, if it's available
+  private $id; // could have used SSN, if it was available
   private $name;
   private $address;
 
@@ -55,6 +55,32 @@ class Address {
   private $city;
   private $state;
   private $zip
+}
+#+END_SRC
+
+** Repositories
+#+ATTR_REVEAL: :frag (appear)
+- are objects used to retrieve entities from and persist entities to storage.
+- Recommend creating an interface or trait so that different implementatinos can be provided (this is the Strategy Pattern: https://en.wikipedia.org/wiki/Strategy_pattern)
+
+** Example Repository
+#+BEGIN_SRC php
+interface Repository {
+  function getById($id);
+  function save($entity);
+}
+
+class MySqlRepository implements Repository {
+
+  function getById($id) { /* query real MySQL database */ }
+  function save($entity) { /* insert data into real MySQL database */ }
+}
+
+class InMemoryRepository implements Repository {
+  private $db; // array of id to entity
+
+  function getById($id) { /* query $db */ }
+  function save($entity) { /* mutate $db */ }
 }
 #+END_SRC
 

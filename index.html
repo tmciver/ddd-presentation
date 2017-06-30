@@ -26,16 +26,16 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h2 class="author">Tim McIver</h2><p class="date">Created: 2017-06-29 Thu 22:02</p>
+<section id="sec-title-slide"><h2 class="author">Tim McIver</h2><p class="date">Created: 2017-06-29 Thu 23:01</p>
 </section>
 
 <section>
-<section id="slide-orgbedf2e6">
-<h2 id="orgbedf2e6">DDD: What Is It?</h2>
-<div class="outline-text-2" id="text-orgbedf2e6">
+<section id="slide-org2a94410">
+<h2 id="org2a94410">DDD: What Is It?</h2>
+<div class="outline-text-2" id="text-org2a94410">
 </div></section>
-<section id="slide-org9ad7349">
-<h3 id="org9ad7349">Domain-Driven Design</h3>
+<section id="slide-org6d7dd87">
+<h3 id="org6d7dd87">Domain-Driven Design</h3>
 <ul>
 <li class="fragment appear">Emphasizes the domain model as the central piece of an application</li>
 <li class="fragment appear">Emphasizes direct collaboration between developers and domain experts</li>
@@ -46,12 +46,12 @@
 </section>
 </section>
 <section>
-<section id="slide-org8eb0de7">
-<h2 id="org8eb0de7">Building Blocks</h2>
-<div class="outline-text-2" id="text-org8eb0de7">
+<section id="slide-orgdc66393">
+<h2 id="orgdc66393">Building Blocks</h2>
+<div class="outline-text-2" id="text-orgdc66393">
 </div></section>
-<section id="slide-orgf2be945">
-<h3 id="orgf2be945">4 Basic Types</h3>
+<section id="slide-orgcda3ace">
+<h3 id="orgcda3ace">4 Basic Types</h3>
 <ul>
 <li>Entities</li>
 <li>Value Objects</li>
@@ -61,8 +61,8 @@
 </ul>
 
 </section>
-<section id="slide-org1ae391f">
-<h3 id="org1ae391f">Entities</h3>
+<section id="slide-org259dcc1">
+<h3 id="org259dcc1">Entities</h3>
 <p>
 are domain objects whose identity is NOT defined by its attributes
 </p>
@@ -74,8 +74,8 @@ are domain objects whose identity is NOT defined by its attributes
 </ul>
 
 </section>
-<section id="slide-org2b6d595">
-<h3 id="org2b6d595">Value Objects</h3>
+<section id="slide-org27ec270">
+<h3 id="org27ec270">Value Objects</h3>
 <p>
 are objects that ARE defined by their attributes
 </p>
@@ -86,13 +86,13 @@ are objects that ARE defined by their attributes
 </ul>
 
 </section>
-<section id="slide-org1755e66">
-<h3 id="org1755e66">Example</h3>
+<section id="slide-org651ee49">
+<h3 id="org651ee49">Example</h3>
 <div class="org-src-container">
 
 <pre  class="src src-php"><span style="color: #73d216;">// </span><span style="color: #73d216;">Entity</span>
 <span style="color: #b4fa70;">class</span> <span style="color: #8cc4ff;">User</span> {
-  <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">id</span>; <span style="color: #73d216;">// </span><span style="color: #73d216;">could have used SSN, if it's available</span>
+  <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">id</span>; <span style="color: #73d216;">// </span><span style="color: #73d216;">could have used SSN, if it was available</span>
   <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">name</span>;
   <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">address</span>;
 
@@ -117,8 +117,42 @@ are objects that ARE defined by their attributes
 </div>
 
 </section>
-<section id="slide-org06254b4">
-<h3 id="org06254b4">Bounded Context</h3>
+<section id="slide-orgf202524">
+<h3 id="orgf202524">Repositories</h3>
+<ul>
+<li class="fragment appear">are objects used to retrieve entities from and persist entities to storage.</li>
+<li class="fragment appear">Recommend creating an interface or trait so that different implementatinos can be provided (this is the Strategy Pattern: <a href="https://en.wikipedia.org/wiki/Strategy_pattern">https://en.wikipedia.org/wiki/Strategy_pattern</a>)</li>
+
+</ul>
+
+</section>
+<section id="slide-orgd271943">
+<h3 id="orgd271943">Example Repository</h3>
+<div class="org-src-container">
+
+<pre  class="src src-php"><span style="color: #b4fa70;">interface</span> <span style="color: #8cc4ff;">Repository</span> {
+  <span style="color: #b4fa70;">function</span> <span style="color: #fce94f;">getById</span>($<span style="color: #fcaf3e;">id</span>);
+  <span style="color: #b4fa70;">function</span> <span style="color: #fce94f;">save</span>($<span style="color: #fcaf3e;">entity</span>);
+}
+
+<span style="color: #b4fa70;">class</span> <span style="color: #8cc4ff;">MySqlRepository</span> <span style="color: #b4fa70;">implements</span> <span style="color: #8cc4ff;">Repository</span> {
+
+  <span style="color: #b4fa70;">function</span> <span style="color: #fce94f;">getById</span>($<span style="color: #fcaf3e;">id</span>) { <span style="color: #73d216;">/* </span><span style="color: #73d216;">query real MySQL database </span><span style="color: #73d216;">*/</span> }
+  <span style="color: #b4fa70;">function</span> <span style="color: #fce94f;">save</span>($<span style="color: #fcaf3e;">entity</span>) { <span style="color: #73d216;">/* </span><span style="color: #73d216;">insert data into real MySQL database </span><span style="color: #73d216;">*/</span> }
+}
+
+<span style="color: #b4fa70;">class</span> <span style="color: #8cc4ff;">InMemoryRepository</span> <span style="color: #b4fa70;">implements</span> <span style="color: #8cc4ff;">Repository</span> {
+  <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">db</span>; <span style="color: #73d216;">// </span><span style="color: #73d216;">array of id to entity</span>
+
+  <span style="color: #b4fa70;">function</span> <span style="color: #fce94f;">getById</span>($<span style="color: #fcaf3e;">id</span>) { <span style="color: #73d216;">/* </span><span style="color: #73d216;">query $db </span><span style="color: #73d216;">*/</span> }
+  <span style="color: #b4fa70;">function</span> <span style="color: #fce94f;">save</span>($<span style="color: #fcaf3e;">entity</span>) { <span style="color: #73d216;">/* </span><span style="color: #73d216;">mutate $db </span><span style="color: #73d216;">*/</span> }
+}
+</pre>
+</div>
+
+</section>
+<section id="slide-orgb561c24">
+<h3 id="orgb561c24">Bounded Context</h3>
 </section>
 </section>
 </div>
