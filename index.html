@@ -26,16 +26,16 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h2 class="author">Tim McIver</h2><p class="date">Created: 2017-06-29 Thu 20:23</p>
+<section id="sec-title-slide"><h2 class="author">Tim McIver</h2><p class="date">Created: 2017-06-29 Thu 22:02</p>
 </section>
 
 <section>
-<section id="slide-org83aded2">
-<h2 id="org83aded2">DDD: What Is It?</h2>
-<div class="outline-text-2" id="text-org83aded2">
+<section id="slide-orgbedf2e6">
+<h2 id="orgbedf2e6">DDD: What Is It?</h2>
+<div class="outline-text-2" id="text-orgbedf2e6">
 </div></section>
-<section id="slide-org2617ce2">
-<h3 id="org2617ce2">Domain-Driven Design</h3>
+<section id="slide-org9ad7349">
+<h3 id="org9ad7349">Domain-Driven Design</h3>
 <ul>
 <li class="fragment appear">Emphasizes the domain model as the central piece of an application</li>
 <li class="fragment appear">Emphasizes direct collaboration between developers and domain experts</li>
@@ -46,55 +46,79 @@
 </section>
 </section>
 <section>
-<section id="slide-orgd4a126b">
-<h2 id="orgd4a126b">Building Blocks</h2>
-<div class="outline-text-2" id="text-orgd4a126b">
+<section id="slide-org8eb0de7">
+<h2 id="org8eb0de7">Building Blocks</h2>
+<div class="outline-text-2" id="text-org8eb0de7">
 </div></section>
-<section id="slide-orgb0529e0">
-<h3 id="orgb0529e0">Domain Objects</h3>
+<section id="slide-orgf2be945">
+<h3 id="orgf2be945">4 Basic Types</h3>
 <ul>
 <li>Entities</li>
 <li>Value Objects</li>
+<li>Repositories</li>
+<li>Services</li>
 
 </ul>
 
 </section>
-<section id="slide-org6ee7090">
-<h3 id="org6ee7090">Entities</h3>
+<section id="slide-org1ae391f">
+<h3 id="org1ae391f">Entities</h3>
 <p>
-Are objects that
+are domain objects whose identity is NOT defined by its attributes
 </p>
 <ul>
-<li class="fragment appear">Have some kind of identity</li>
-<li class="fragment appear">Are not defined by their attributes</li>
-<li class="fragment appear">Need to have changes tracked</li>
+<li class="fragment appear">Consider two people with the same name; they are not the same entity!</li>
+<li class="fragment appear">Some entities will have natural identifiers. E.g., SSN.</li>
+<li class="fragment appear">If there is no natural identifier, one must be generated for it at creation time.</li>
 
 </ul>
 
 </section>
-<section id="slide-org0aaef15">
-<h3 id="org0aaef15">Entities</h3>
+<section id="slide-org2b6d595">
+<h3 id="org2b6d595">Value Objects</h3>
 <p>
-An example might be a User object.
+are objects that ARE defined by their attributes
 </p>
 <ul>
-<li class="fragment appear">Cannot use attributes such as name and address to identify as these can change over time.</li>
-<li class="fragment appear">SSN could be used as an ID, if there is one.</li>
-<li class="fragment appear">For entities that have no natural identifier, one can be generated at creation time.</li>
+<li class="fragment appear">Need no separate identifier</li>
+<li class="fragment appear">Should be immutable</li>
 
 </ul>
 
 </section>
-<section id="slide-org85de824">
-<h3 id="org85de824">Value Objects</h3>
-<p>
-Are objects that
-</p>
-<ul>
-<li class="fragment appear">Are defined by their attributes</li>
-<li class="fragment appear">Objects that have no identity but are defined by their values (e.g., Name, Date, Address)</li>
+<section id="slide-org1755e66">
+<h3 id="org1755e66">Example</h3>
+<div class="org-src-container">
 
-</ul>
+<pre  class="src src-php"><span style="color: #73d216;">// </span><span style="color: #73d216;">Entity</span>
+<span style="color: #b4fa70;">class</span> <span style="color: #8cc4ff;">User</span> {
+  <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">id</span>; <span style="color: #73d216;">// </span><span style="color: #73d216;">could have used SSN, if it's available</span>
+  <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">name</span>;
+  <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">address</span>;
+
+  <span style="color: #b4fa70;">public</span> <span style="color: #b4fa70;">function</span> <span style="color: #fce94f;">changeName</span>($<span style="color: #fcaf3e;">newName</span>) { $<span style="color: #e9b2e3;">this</span>-&gt;<span style="color: #fcaf3e;">name</span> = $<span style="color: #fcaf3e;">newName</span>; }
+  <span style="color: #b4fa70;">public</span> <span style="color: #b4fa70;">function</span> <span style="color: #fce94f;">changeAddress</span>($<span style="color: #fcaf3e;">newAddress</span>) { $<span style="color: #e9b2e3;">this</span>-&gt;<span style="color: #fcaf3e;">address</span> = $<span style="color: #fcaf3e;">newAddress</span>; }
+}
+
+<span style="color: #73d216;">// </span><span style="color: #73d216;">Value Object</span>
+<span style="color: #b4fa70;">class</span> <span style="color: #8cc4ff;">Name</span> {
+  <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">firstName</span>;
+  <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">lastName</span>;
+}
+
+<span style="color: #73d216;">// </span><span style="color: #73d216;">Value Object</span>
+<span style="color: #b4fa70;">class</span> <span style="color: #8cc4ff;">Address</span> {
+  <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">street</span>;
+  <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">city</span>;
+  <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">state</span>;
+  <span style="color: #b4fa70;">private</span> $<span style="color: #fcaf3e;">zip</span>
+}
+</pre>
+</div>
+
+</section>
+<section id="slide-org06254b4">
+<h3 id="org06254b4">Bounded Context</h3>
 </section>
 </section>
 </div>

@@ -12,28 +12,53 @@
 
 * Building Blocks
 
-** Domain Objects
+** 4 Basic Types
 - Entities
 - Value Objects
+- Repositories
+- Services
 
 ** Entities
-Are objects that
+are domain objects whose identity is NOT defined by its attributes
 #+ATTR_REVEAL: :frag (appear)
-- Have some kind of identity
-- Are not defined by their attributes
-- Need to have changes tracked
-
-** Entities
-An example might be a User object.
-#+ATTR_REVEAL: :frag (appear)
-- Cannot use attributes such as name and address to identify as these can change over time.
-- SSN could be used as an ID, if there is one.
-- For entities that have no natural identifier, one can be generated at creation time.
+- Consider two people with the same name; they are not the same entity!
+- Some entities will have natural identifiers. E.g., SSN.
+- If there is no natural identifier, one must be generated for it at creation time.
 
 ** Value Objects
-Are objects that
+are objects that ARE defined by their attributes
 #+ATTR_REVEAL: :frag (appear)
-- Are defined by their attributes
-- Objects that have no identity but are defined by their values (e.g., Name, Date, Address)
+- Need no separate identifier
+- Should be immutable
+
+** Example
+#+BEGIN_SRC php
+// Entity
+class User {
+  private $id; // could have used SSN, if it's available
+  private $name;
+  private $address;
+
+  public function changeName($newName) { $this->name = $newName; }
+  public function changeAddress($newAddress) { $this->address = $newAddress; }
+}
+
+// Value Object
+class Name {
+  private $firstName;
+  private $lastName;
+}
+
+// Value Object
+class Address {
+  private $street;
+  private $city;
+  private $state;
+  private $zip
+}
+#+END_SRC
+
+** Bounded Context
+
 
 
