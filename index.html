@@ -26,16 +26,16 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h2 class="author">Tim McIver</h2><p class="date">Created: 2017-06-30 Fri 14:21</p>
+<section id="sec-title-slide"><h2>Domain-Driven Design</h2><h2 class="author">Tim McIver</h2> 
 </section>
 
 <section>
-<section id="slide-orgb28ccf7">
-<h2 id="orgb28ccf7">DDD: What Is It?</h2>
-<div class="outline-text-2" id="text-orgb28ccf7">
+<section id="slide-org8f09c0c">
+<h2 id="org8f09c0c">DDD: What Is It?</h2>
+<div class="outline-text-2" id="text-org8f09c0c">
 </div></section>
-<section id="slide-org8ca4956">
-<h3 id="org8ca4956">Domain-Driven Design</h3>
+<section id="slide-org76b9e3e">
+<h3 id="org76b9e3e">Domain-Driven Design</h3>
 <ul>
 <li class="fragment appear">Emphasizes the domain model as the central piece of an application</li>
 <li class="fragment appear">Emphasizes direct collaboration between developers and domain experts</li>
@@ -46,12 +46,12 @@
 </section>
 </section>
 <section>
-<section id="slide-org0e8ed05">
-<h2 id="org0e8ed05">Building Blocks</h2>
-<div class="outline-text-2" id="text-org0e8ed05">
+<section id="slide-orga3a776d">
+<h2 id="orga3a776d">Building Blocks</h2>
+<div class="outline-text-2" id="text-orga3a776d">
 </div></section>
-<section id="slide-orgdcc68b6">
-<h3 id="orgdcc68b6">4 Basic Types</h3>
+<section id="slide-orgb6452aa">
+<h3 id="orgb6452aa">4 Basic Types</h3>
 <ul>
 <li>Entities</li>
 <li>Value Objects</li>
@@ -61,8 +61,8 @@
 </ul>
 
 </section>
-<section id="slide-org3163136">
-<h3 id="org3163136">Entities</h3>
+<section id="slide-orge772ebb">
+<h3 id="orge772ebb">Entities</h3>
 <p>
 are domain objects whose identity is NOT defined by their attributes
 </p>
@@ -74,8 +74,8 @@ are domain objects whose identity is NOT defined by their attributes
 </ul>
 
 </section>
-<section id="slide-org4a1e3ca">
-<h3 id="org4a1e3ca">Value Objects</h3>
+<section id="slide-org8d8b4de">
+<h3 id="org8d8b4de">Value Objects</h3>
 <p>
 are objects that ARE defined by their attributes
 </p>
@@ -86,8 +86,8 @@ are objects that ARE defined by their attributes
 </ul>
 
 </section>
-<section id="slide-orge2d96ac">
-<h3 id="orge2d96ac">Some Notes About References</h3>
+<section id="slide-org874b22c">
+<h3 id="org874b22c">Some Notes About References</h3>
 <ul>
 <li class="fragment appear">An Entity should reference other Entities by their identifiers - not through direct references.</li>
 <li class="fragment appear">A reference to an Entity should be retrieved by using a Repository.</li>
@@ -96,8 +96,8 @@ are objects that ARE defined by their attributes
 </ul>
 
 </section>
-<section id="slide-org49d8036">
-<h3 id="org49d8036">Example</h3>
+<section id="slide-orgf7a9909">
+<h3 id="orgf7a9909">Example</h3>
 <div class="org-src-container">
 
 <pre  class="src src-php"><span style="color: #73d216;">// </span><span style="color: #73d216;">Entity</span>
@@ -127,8 +127,8 @@ are objects that ARE defined by their attributes
 </div>
 
 </section>
-<section id="slide-orga0a5d03">
-<h3 id="orga0a5d03">Repositories</h3>
+<section id="slide-orgfcd5e59">
+<h3 id="orgfcd5e59">Repositories</h3>
 <ul>
 <li class="fragment appear">are objects used to retrieve entities from and persist entities to storage.</li>
 <li class="fragment appear">Recommend creating an interface or trait so that different implementatinos can be provided (this is the Strategy Pattern: <a href="https://en.wikipedia.org/wiki/Strategy_pattern">https://en.wikipedia.org/wiki/Strategy_pattern</a>)</li>
@@ -136,8 +136,8 @@ are objects that ARE defined by their attributes
 </ul>
 
 </section>
-<section id="slide-org5acdcb5">
-<h3 id="org5acdcb5">Example Repository</h3>
+<section id="slide-org9f98240">
+<h3 id="org9f98240">Example Repository</h3>
 <div class="org-src-container">
 
 <pre  class="src src-php"><span style="color: #b4fa70;">interface</span> <span style="color: #8cc4ff;">Repository</span> {
@@ -161,8 +161,8 @@ are objects that ARE defined by their attributes
 </div>
 
 </section>
-<section id="slide-org9dea3c9">
-<h3 id="org9dea3c9">Services</h3>
+<section id="slide-org70f8a61">
+<h3 id="org70f8a61">Services</h3>
 <p>
 are objects that
 </p>
@@ -173,8 +173,8 @@ are objects that
 </ul>
 
 </section>
-<section id="slide-orgff7760e">
-<h3 id="orgff7760e">Example Service</h3>
+<section id="slide-org2cd6842">
+<h3 id="org2cd6842">Example Service</h3>
 <div class="org-src-container">
 
 <pre  class="src src-scala"><span style="color: #b4fa70;">class</span> <span style="color: #8cc4ff;">OpenEnrollment</span>(oeRepo<span style="color: #b4fa70;">:</span> <span style="color: #8cc4ff;">Repository</span>[<span style="color: #e9b2e3;">OpenEnrollment</span>],
@@ -204,13 +204,31 @@ are objects that
 </div>
 
 </section>
-<section id="slide-orgb94b94b">
-<h3 id="orgb94b94b">Bounded Contexts</h3>
+<section id="slide-orgd6815a6">
+<h3 id="orgd6815a6">Bounded Contexts</h3>
 <ul>
 <li class="fragment appear">Could be defined as "a boundary within which a given model applies".</li>
-<li class="fragment appear">Similarly named models in different bounded contexts could be very different</li>
+<li class="fragment appear">Similarly named models in different bounded contexts could be very different
+<ul>
+<li>One could be an Entity while the other a Value Object.</li>
+
+</ul></li>
+<li class="fragment appear">Typically a bounded context is implemented as its own microservice.</li>
 
 </ul>
+
+</section>
+<section id="slide-org93ab269">
+<h3 id="org93ab269">References</h3>
+<ul>
+<li>"Domain-Driven Design Distilled" by Vaughn Vernon <a href="https://www.safaribooksonline.com/library/view/domain-driven-design-distilled/9780134434964/">https://www.safaribooksonline.com/library/view/domain-driven-design-distilled/9780134434964/</a></li>
+<li>"Patterns, Principles, and Practices of Domain-Driven Design" by Nick Tune, Scott Millett <a href="https://www.safaribooksonline.com/library/view/patterns-principles-and/9781118714706/">https://www.safaribooksonline.com/library/view/patterns-principles-and/9781118714706/</a></li>
+
+</ul>
+
+</section>
+<section id="slide-org0f7dde3">
+<h3 id="org0f7dde3">Questions?</h3>
 </section>
 </section>
 </div>

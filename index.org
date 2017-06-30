@@ -127,4 +127,12 @@ class OpenEnrollment(oeRepo: Repository[OpenEnrollment],
 #+ATTR_REVEAL: :frag (appear)
 - Could be defined as "a boundary within which a given model applies".
 - Similarly named models in different bounded contexts could be very different
+  - One could be an Entity while the other a Value Object.
+- Typically a bounded context is implemented as its own microservice.
+
+** References
+- "Domain-Driven Design Distilled" by Vaughn Vernon https://www.safaribooksonline.com/library/view/domain-driven-design-distilled/9780134434964/
+- "Patterns, Principles, and Practices of Domain-Driven Design" by Nick Tune, Scott Millett https://www.safaribooksonline.com/library/view/patterns-principles-and/9781118714706/
+
+** Questions?
 
