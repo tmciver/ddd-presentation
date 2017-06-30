@@ -12,7 +12,7 @@
 
 * Building Blocks
 
-** Types of Domain Objects
+** Domain Objects
 - Entities
 - Value Objects
 
