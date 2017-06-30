@@ -19,7 +19,7 @@
 - Services
 
 ** Entities
-are domain objects whose identity is NOT defined by its attributes
+are domain objects whose identity is NOT defined by their attributes
 #+ATTR_REVEAL: :frag (appear)
 - Consider two people with the same name; they are not the same entity!
 - Some entities will have natural identifiers. E.g., SSN.
@@ -84,7 +84,38 @@ class InMemoryRepository implements Repository {
 }
 #+END_SRC
 
+** Services
+are objects that
+#+ATTR_REVEAL: :frag (appear)
+- orchestrate coordination of complex domain logic
+- ideally will allow clients to perform this complex action with a single method call
+
+** Example Service
+#+BEGIN_SRC scala
+class OpenEnrollment(oeRepo: Repository[OpenEnrollment],
+                     titanClient: TitanClient) {
+  def edit(oeId: UUID, startDate: Instant, endDate: Instant): Future[Unit] = {
+    for { // In Future
+      // get the OE domain object
+      oe <- oeRepo.getById(oeID)
+
+      // edit the OE
+      editedOe <- editOpenEnrollent(oe)
+
+      // save it
+      _ <- oeRepo.save(editedOe)
+
+      // conditionally "run" it
+      _ <- if (editedOe.status === OpenEnrollmentState.Ready) {
+             runOpenEnrollment(editedOe)
+           } else {
+             Future.successful(())
+	   }
+    }
+  }
+
+  def runOpenEnrollment(oe: OpenEnrollment): Future[Unit] = { ... }
+}
+#+END_SRC
+
 ** Bounded Context
-
-
-

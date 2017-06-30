@@ -26,16 +26,16 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h2 class="author">Tim McIver</h2><p class="date">Created: 2017-06-29 Thu 23:01</p>
+<section id="sec-title-slide"><h2 class="author">Tim McIver</h2><p class="date">Created: 2017-06-30 Fri 13:28</p>
 </section>
 
 <section>
-<section id="slide-org2a94410">
-<h2 id="org2a94410">DDD: What Is It?</h2>
-<div class="outline-text-2" id="text-org2a94410">
+<section id="slide-org257b5ab">
+<h2 id="org257b5ab">DDD: What Is It?</h2>
+<div class="outline-text-2" id="text-org257b5ab">
 </div></section>
-<section id="slide-org6d7dd87">
-<h3 id="org6d7dd87">Domain-Driven Design</h3>
+<section id="slide-org8a41703">
+<h3 id="org8a41703">Domain-Driven Design</h3>
 <ul>
 <li class="fragment appear">Emphasizes the domain model as the central piece of an application</li>
 <li class="fragment appear">Emphasizes direct collaboration between developers and domain experts</li>
@@ -46,12 +46,12 @@
 </section>
 </section>
 <section>
-<section id="slide-orgdc66393">
-<h2 id="orgdc66393">Building Blocks</h2>
-<div class="outline-text-2" id="text-orgdc66393">
+<section id="slide-org2778a2f">
+<h2 id="org2778a2f">Building Blocks</h2>
+<div class="outline-text-2" id="text-org2778a2f">
 </div></section>
-<section id="slide-orgcda3ace">
-<h3 id="orgcda3ace">4 Basic Types</h3>
+<section id="slide-orgbf96ab4">
+<h3 id="orgbf96ab4">4 Basic Types</h3>
 <ul>
 <li>Entities</li>
 <li>Value Objects</li>
@@ -61,10 +61,10 @@
 </ul>
 
 </section>
-<section id="slide-org259dcc1">
-<h3 id="org259dcc1">Entities</h3>
+<section id="slide-orgd541902">
+<h3 id="orgd541902">Entities</h3>
 <p>
-are domain objects whose identity is NOT defined by its attributes
+are domain objects whose identity is NOT defined by their attributes
 </p>
 <ul>
 <li class="fragment appear">Consider two people with the same name; they are not the same entity!</li>
@@ -74,8 +74,8 @@ are domain objects whose identity is NOT defined by its attributes
 </ul>
 
 </section>
-<section id="slide-org27ec270">
-<h3 id="org27ec270">Value Objects</h3>
+<section id="slide-org66b8cbd">
+<h3 id="org66b8cbd">Value Objects</h3>
 <p>
 are objects that ARE defined by their attributes
 </p>
@@ -86,8 +86,8 @@ are objects that ARE defined by their attributes
 </ul>
 
 </section>
-<section id="slide-org651ee49">
-<h3 id="org651ee49">Example</h3>
+<section id="slide-orga3255a1">
+<h3 id="orga3255a1">Example</h3>
 <div class="org-src-container">
 
 <pre  class="src src-php"><span style="color: #73d216;">// </span><span style="color: #73d216;">Entity</span>
@@ -117,8 +117,8 @@ are objects that ARE defined by their attributes
 </div>
 
 </section>
-<section id="slide-orgf202524">
-<h3 id="orgf202524">Repositories</h3>
+<section id="slide-orgd29d237">
+<h3 id="orgd29d237">Repositories</h3>
 <ul>
 <li class="fragment appear">are objects used to retrieve entities from and persist entities to storage.</li>
 <li class="fragment appear">Recommend creating an interface or trait so that different implementatinos can be provided (this is the Strategy Pattern: <a href="https://en.wikipedia.org/wiki/Strategy_pattern">https://en.wikipedia.org/wiki/Strategy_pattern</a>)</li>
@@ -126,8 +126,8 @@ are objects that ARE defined by their attributes
 </ul>
 
 </section>
-<section id="slide-orgd271943">
-<h3 id="orgd271943">Example Repository</h3>
+<section id="slide-org2a61f7c">
+<h3 id="org2a61f7c">Example Repository</h3>
 <div class="org-src-container">
 
 <pre  class="src src-php"><span style="color: #b4fa70;">interface</span> <span style="color: #8cc4ff;">Repository</span> {
@@ -151,8 +151,56 @@ are objects that ARE defined by their attributes
 </div>
 
 </section>
-<section id="slide-orgb561c24">
-<h3 id="orgb561c24">Bounded Context</h3>
+<section id="slide-org5b99b4b">
+<h3 id="org5b99b4b">Services</h3>
+<p>
+are objects that
+</p>
+<ul>
+<li class="fragment appear">orchestrate coordination of complex domain logic</li>
+<li class="fragment appear">ideally will allow clients to perform this complex action with a single method call</li>
+
+</ul>
+
+</section>
+<section id="slide-org408c956">
+<h3 id="org408c956">Example Service</h3>
+<div class="org-src-container">
+
+<pre  class="src src-scala"><span style="color: #b4fa70;">class</span> <span style="color: #8cc4ff;">OpenEnrollment</span>(oeRepo<span style="color: #b4fa70;">:</span> <span style="color: #8cc4ff;">Repository</span>[<span style="color: #e9b2e3;">OpenEnrollment</span>],
+                     titanClient<span style="color: #b4fa70;">:</span> <span style="color: #8cc4ff;">TitanClient</span>) {
+  <span style="color: #b4fa70;">def</span> <span style="color: #fce94f;">edit</span>(oeId<span style="color: #b4fa70;">:</span> <span style="color: #8cc4ff;">UUID</span>, startDate<span style="color: #b4fa70;">:</span> <span style="color: #8cc4ff;">Instant</span>, endDate<span style="color: #b4fa70;">:</span> <span style="color: #8cc4ff;">Instant</span>)<span style="color: #b4fa70;">:</span> <span style="color: #8cc4ff;">Future</span>[<span style="color: #e9b2e3;">Unit</span>] <span style="color: #b4fa70;">=</span> {
+    <span style="color: #b4fa70;">for</span> { <span style="color: #73d216;">// </span><span style="color: #73d216;">In Future</span>
+      <span style="color: #73d216;">// </span><span style="color: #73d216;">get the OE domain object</span>
+      oe <span style="color: #b4fa70;">&lt;-</span> oeRepo.getById(oeID)
+
+      <span style="color: #73d216;">// </span><span style="color: #73d216;">edit the OE</span>
+      editedOe <span style="color: #b4fa70;">&lt;-</span> editOpenEnrollent(oe)
+
+      <span style="color: #73d216;">// </span><span style="color: #73d216;">save it</span>
+      <span style="color: #b4fa70;">_</span> <span style="color: #b4fa70;">&lt;-</span> oeRepo.save(editedOe)
+
+      <span style="color: #73d216;">// </span><span style="color: #73d216;">conditionally "run" it</span>
+      <span style="color: #b4fa70;">_</span> <span style="color: #b4fa70;">&lt;-</span> <span style="color: #b4fa70;">if</span> (editedOe.status === <span style="color: #e9b2e3;">OpenEnrollmentState</span>.<span style="color: #e9b2e3;">Ready</span>) {
+             runOpenEnrollment(editedOe)
+           } <span style="color: #b4fa70;">else</span> {
+             <span style="color: #e9b2e3;">Future</span>.successful(())
+           }
+    }
+  }
+
+  <span style="color: #b4fa70;">def</span> <span style="color: #fce94f;">runOpenEnrollment</span>(oe<span style="color: #b4fa70;">:</span> <span style="color: #8cc4ff;">OpenEnrollment</span>)<span style="color: #b4fa70;">:</span> <span style="color: #8cc4ff;">Future</span>[<span style="color: #e9b2e3;">Unit</span>] <span style="color: #b4fa70;">=</span> { ... }
+}
+</pre>
+</div>
+
+<p>
+There's a lot of complexity that's being ignored here!
+</p>
+
+</section>
+<section id="slide-org2cbf308">
+<h3 id="org2cbf308">Bounded Context</h3>
 </section>
 </section>
 </div>
