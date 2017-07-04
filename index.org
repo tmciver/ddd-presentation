@@ -131,6 +131,7 @@ class OpenEnrollment(oeRepo: Repository[OpenEnrollment],
 - Typically a bounded context is implemented as its own microservice.
 
 ** References
+- "Domain-Driven Design: Tackling Complexity in the Heart of Software" by Eric Evans https://www.safaribooksonline.com/library/view/domain-driven-design-tackling/0321125215/ (thanks to Vincent for pointing out that I had forgotten this one!)
 - "Domain-Driven Design Distilled" by Vaughn Vernon https://www.safaribooksonline.com/library/view/domain-driven-design-distilled/9780134434964/
 - "Patterns, Principles, and Practices of Domain-Driven Design" by Nick Tune, Scott Millett https://www.safaribooksonline.com/library/view/patterns-principles-and/9781118714706/
 
