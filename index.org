@@ -106,7 +106,7 @@ class OpenEnrollment(oeRepo: Repository[OpenEnrollment],
       oe <- oeRepo.getById(oeID)
 
       // edit the OE
-      editedOe <- editOpenEnrollent(oe)
+      editedOe <- editOpenEnrollent(oe, startDate, endDate)
 
       // save it
       _ <- oeRepo.save(editedOe)
@@ -116,7 +116,7 @@ class OpenEnrollment(oeRepo: Repository[OpenEnrollment],
              runOpenEnrollment(editedOe)
            else
              Future.successful(())
-    }
+    } yield ()
   }
 
   def runOpenEnrollment(oe: OpenEnrollment): Future[Unit] = { ... }
